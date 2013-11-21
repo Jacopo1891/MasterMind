@@ -35,7 +35,8 @@ public class Partita{
 		resa=false;
 		while (i<numeri.length){
 
-			int x = (int)(Math.random()*9);
+			double k = Math.random()*9;
+			int x = (int)Math.round(k);
 			if (unico(x, i, numeri)){
 				numeri[i]=x;
 				i++;
