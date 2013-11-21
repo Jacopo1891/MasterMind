@@ -2,8 +2,16 @@ package InterfacciaGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 import MetodiGioco.*;
+
+/** 
+ * @author Jacopo C.
+ *	Classe che crea l'interfaccia grafica e relativi pulsanti.
+ *	Le azioni sono gestite nelle classi ascoltatrici.
+ */
 
 public class Grafica{
 
@@ -24,12 +32,18 @@ public class Grafica{
 	
 	public Grafica(){
 		
+		try {
+			salvataggi=MM.readStore();
+		} catch (Exception e) {
+			salvataggi=new Store();
+		}
+		
 		home= new JFrame("MasterMind");
 		home.setSize(365,440);
 		home.setResizable(false);
 		home.setLayout(null);
 		home.setLocationRelativeTo(null);
-		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		home.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		titolo = new JLabel("MasterMind");
 		titolo.setBounds(120, 25, 110, 30);
@@ -99,7 +113,15 @@ public class Grafica{
 		mntStat.addActionListener(aslM);
 		mntmResa.addActionListener(aslM);
 		
+		home.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent we){
+				try {
+					MM.saveStore(salvataggi);
+				} catch (Exception e1) {}
+				System.exit(0);
+			}
+		});
 		home.setVisible(true);
 	}
-	
+
 }

@@ -1,76 +1,60 @@
 package MetodiGioco;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 
-public class MasterMind {
+/** 
+ * @author Jacopo C.
+ *	Classe che gestisce la serializzazione di un oggetto di tipo Store
+ *	contenente le statistiche delle partite precedentemente giocate.
+ */
+
+public class MasterMind{
 	
 	String file="MasterMind.stat";
-	String path="C:\\Users\\Jacopo\\Desktop\\";
+	String path=System.getProperty("user.home")+"\\";
 	File fileOut= new File(path+file);
-	Store Store=null;
+	Store Store;
 	
 	public MasterMind(){
-		
-		if(!fileOut.exists()){
-			fileOut = new File(path+file);
-		} 
-		else{
+/**
+ *  Costruttore. 
+ *  Se esiste un file delle statistiche lo legge
+ *  altrimenti ne crea uno nuovo.		
+ */
+		if(fileOut.exists()){
 			try {
-				Store=openMMStat();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+				Store=readStore();
+			} catch (Exception e) {}
 		}
-	}
-
-	public void addStore(Store s){
-		Store=s;
+		else{
+			Store=new Store();
+		}
 	}
 	
-	public Store openMMStat() throws FileNotFoundException{
-		
-		Store myStore=null;
-		try(			
-			InputStream lett = new FileInputStream(path+file);
-			InputStream buffer = new BufferedInputStream(lett);
-			ObjectInputStream input = new ObjectInputStream(buffer);
-			){
-			try {
-				myStore= (Store) input.readObject();
-			} catch (ClassNotFoundException e) {
-				System.out.println("Nessuno Store trovato");
-			}			
-		} 
-		catch (IOException e) {	
-			e.printStackTrace();
-		}
+	public Store readStore() throws Exception{
+/**
+ * 	Legge le statistiche serializzate e restituisce un oggetto Store che le contiene.		
+ */
+		FileInputStream fileReader = new FileInputStream(path+file);
+		ObjectInputStream objReader = new ObjectInputStream(fileReader);
+		Store myStore = (Store)objReader.readObject();
 		Store=myStore;
+		objReader.close();
 		return Store;
 	}
 	
-	public void saveMMStat(){
-		
-		try (
-			 OutputStream fileS = new FileOutputStream(path+file);
-			 OutputStream buffer = new BufferedOutputStream(fileS);
-			 ObjectOutput output = new ObjectOutputStream(buffer);
-			){
-			  output.writeObject(Store);
-		}  
-		catch(IOException ex){
-			  ex.printStackTrace();
-		}
+	public void saveStore(Store s) throws Exception{
+/**
+ * 	Serializza un oggetto Store preso in ingresso.		
+ */
+		FileOutputStream fileWriter = new FileOutputStream(path+file);
+		ObjectOutputStream objWriter = new ObjectOutputStream(fileWriter);
+		objWriter.writeObject(Store);
+		objWriter.close();
 	}
 	
 }

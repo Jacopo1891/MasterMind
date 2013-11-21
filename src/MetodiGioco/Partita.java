@@ -1,5 +1,10 @@
 package MetodiGioco;
 
+/** 
+ * @author Jacopo C.
+ *	Classe che crea e gestisce la partita.
+ */
+
 public class Partita{
 	
 	int[] numeri;

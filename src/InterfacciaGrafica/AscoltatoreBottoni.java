@@ -2,6 +2,12 @@ package InterfacciaGrafica;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import MetodiGioco.Store;
+
+/** 
+ * @author Jacopo C.
+ * 	Classe per l'ascolto dei pulsanti.
+ */
 
 public class AscoltatoreBottoni implements ActionListener {
 	
@@ -21,14 +27,17 @@ public class AscoltatoreBottoni implements ActionListener {
 			int b= (Integer) g.b.getValue();
 			int c= (Integer) g.c.getValue();
 			int d= (Integer) g.d.getValue();
-					//SI EFFETTUA LA MOSSA E SI AGGIUNGE ALLA STRINGA PER LA STAMPA A SCHERMO
-			g.testo +=g.match.numMosse+".	"+a+b+c+d+"                                                              "+g.match.mossa(a,b,c,d)+"\n";
-			if(g.match.vittoria()){
-				
+			g.testo +=g.match.numMosse+".\t"+a+b+c+d+"\t\t"+g.match.mossa(a,b,c,d)+"\n";
+			if(g.match.vittoria()){		
 				g.testo+=" ~~~~~~~~~~~~~~ HAI VINTO!! ~~~~~~~~~~~~~~";
 			}
+		
+			if(g.match.vittoria()){
+				Store s= new Store(true,g.match.numMosse);
+				g.salvataggi.addStore(s);
+			}
+			
 			g.tentativo.setText(g.testo);
-
 		}
 	}
 }
