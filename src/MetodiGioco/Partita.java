@@ -9,11 +9,12 @@ public class Partita{
 	
 	int[] numeri;
 	int[] mossa;
-	public int numMosse=1;
+	public int numMosse;
 	private boolean vittoria=false, resa=false;
 	
 	public Partita(){
 			
+			numMosse=1;
 			numeri= new int[4];
 			int i=0;
 			while (i<numeri.length){
@@ -28,7 +29,8 @@ public class Partita{
 	}
 	
 	public void newGame(){
-
+		
+		numMosse=1;
 		numeri= new int[4];
 		int i=0;
 		vittoria=false;
