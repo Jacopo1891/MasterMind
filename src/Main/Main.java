@@ -1,12 +1,12 @@
 package Main;
 
-import InterfacciaGrafica.Grafica;
+import InterfacciaGrafica.*;
 
 public class Main {
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
-		Grafica f = new Grafica();
+		GuiMasterMind f = new GuiMasterMind();
 	}		
 }

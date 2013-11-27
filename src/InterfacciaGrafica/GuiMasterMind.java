@@ -2,10 +2,27 @@ package InterfacciaGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.*;
-import MetodiGioco.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextPane;
+import javax.swing.SpinnerNumberModel;
+
+import Ascoltatori.AscoltatoreBottoni;
+import Ascoltatori.AscoltatoreJMenù;
+import Ascoltatori.AscoltatoreKey;
+import MetodiGioco.MasterMind;
+import MetodiGioco.Partita;
+import MetodiGioco.Store;
 
 /** 
  * @author Jacopo C.
@@ -13,7 +30,7 @@ import MetodiGioco.*;
  *	Le azioni sono gestite nelle classi ascoltatrici.
  */
 
-public class Grafica{
+public class GuiMasterMind{
 
 	JFrame home;
 	JLabel titolo;
@@ -30,7 +47,7 @@ public class Grafica{
 	JScrollPane scrollPane;
 	String testo ="";
 	
-	public Grafica(){
+	public GuiMasterMind(){
 		
 		try {
 			salvataggi=MM.readStore();
@@ -112,6 +129,10 @@ public class Grafica{
 		mntmHelp.addActionListener(aslM);
 		mntStat.addActionListener(aslM);
 		mntmResa.addActionListener(aslM);
+		
+		AscoltatoreKey alsK = new AscoltatoreKey(this);
+		KeyboardFocusManager keyManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+		keyManager.addKeyEventDispatcher(alsK);
 		
 		home.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent we){
