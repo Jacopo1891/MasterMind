@@ -1,28 +1,9 @@
 package InterfacciaGrafica;
-
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTextPane;
-import javax.swing.SpinnerNumberModel;
-
-import Ascoltatori.AscoltatoreBottoni;
-import Ascoltatori.AscoltatoreJMenù;
-import Ascoltatori.AscoltatoreKey;
-import MetodiGioco.MasterMind;
-import MetodiGioco.Partita;
-import MetodiGioco.Store;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import Ascoltatori.*;
+import MetodiGioco.*;
 
 /** 
  * @author Jacopo C.

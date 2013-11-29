@@ -1,8 +1,12 @@
 package InterfacciaGrafica;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import MetodiGioco.Store;
+
+/** 
+ * @author Jacopo C.
+ *	Classe astratta che definisce i metodi delle sottoclassi ascoltatrici.
+ */
 
 public abstract class Ascoltatore {
 	
